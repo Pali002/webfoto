@@ -53,6 +53,24 @@
                 ?>
                 </div>
             </div>
+            <div class="row">
+                <?php
+                    $con = mysqli_connect('127.0.0.1','root','root','kepek') or die('Nem sikerült csatlakozni az adatbázishoz!');
+                    $sql = "select * from kepek;";
+                    $eredmeny = mysqli_query($con, $sql);
+
+                    while($sor = mysqli_fetch_array($eredmeny))
+                    {
+                        echo '<div class="col">';
+                            echo '<img class="image-fluid" alt="kép" src ="data:image/jpeg;base64, '.base64_encode($sor['kep']).'">';
+                            echo '<a href="delete.php?id='.$sor['id'].'">Törlés</a>';
+                        echo '</div>';
+                    }
+
+                    mysqli_close($con);
+                ?>
+            </div>
+
         </div>
     </body>
 </html>
